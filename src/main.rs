@@ -1,5 +1,8 @@
 use dioxus::prelude::*;
 
+mod components;
+use components::product_overview;
+
 const FAVICON: Asset = asset!("/assets/favicon.ico");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
 const HEADER_SVG: Asset = asset!("/assets/header.svg");
@@ -16,6 +19,22 @@ fn App() -> Element {
         document::Link { rel: "stylesheet", href: MAIN_CSS } document::Link { rel: "stylesheet", href: TAILWIND_CSS }
         Hero {}
         Hello { message: "World" }
+        product_overview::product_overview {
+            name: "Dioxus".to_string(),
+            price: "$0.00".to_string(),
+            rating: 5.0,
+            review_count: 0,
+            images: vec!["/assets/dioxus.png".to_string()],
+            colors: vec!["#000000".to_string()],
+            sizes: vec!["S".to_string(), "M".to_string(), "L".to_string()],
+            description: "The best way to build web apps".to_string(),
+            features: vec![
+                "Fast".to_string(),
+                "Simple".to_string(),
+                "Modern".to_string(),
+                "Powerful".to_string(),
+            ],
+        }
 
     }
 }
@@ -29,7 +48,7 @@ pub fn Hello(message: String) -> Element {
     }
 }
 
-#[server]
+#[server(GetServerData)]
 async fn get_server_data() -> Result<String, ServerFnError> {
     // Access a database
     tokio::time::sleep(std::time::Duration::from_millis(100)).await;
