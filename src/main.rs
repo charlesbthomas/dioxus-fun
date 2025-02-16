@@ -15,8 +15,25 @@ fn App() -> Element {
         document::Link { rel: "icon", href: FAVICON }
         document::Link { rel: "stylesheet", href: MAIN_CSS } document::Link { rel: "stylesheet", href: TAILWIND_CSS }
         Hero {}
+        Hello { message: "World" }
 
     }
+}
+
+#[component]
+pub fn Hello(message: String) -> Element {
+    let message = use_resource(get_server_data);
+
+    rsx! {
+        div { "Hello, {message.value():?}" }
+    }
+}
+
+#[server]
+async fn get_server_data() -> Result<String, ServerFnError> {
+    // Access a database
+    tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+    Ok("Hello from the server!".to_string())
 }
 
 #[component]
