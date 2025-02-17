@@ -14,7 +14,7 @@ pub struct ProductOverviewProps {
 }
 
 #[component]
-pub fn product_overview(props: ProductOverviewProps) -> Element {
+pub fn ProductOverview(props: ProductOverviewProps) -> Element {
     rsx! {
         div { class: "bg-white",
             div { class: "pb-16 pt-6 sm:pb-24",

@@ -1,7 +1,8 @@
 use dioxus::prelude::*;
 
 mod components;
-use components::product_overview;
+
+use components::ProductOverview;
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");
 const HEADER_SVG: Asset = asset!("/assets/header.svg");
@@ -18,7 +19,7 @@ fn App() -> Element {
         document::Link { rel: "stylesheet", href: TAILWIND_CSS }
         Hero {}
         Hello { message: "World" }
-        product_overview::product_overview {
+        ProductOverview {
             name: "Dioxus".to_string(),
             price: "$0.00".to_string(),
             rating: 5.0,
